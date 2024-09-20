@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="form-container">
+    <form class="searchBar">
+      <input type="text" placeholder="Search..." [formControl]="searchControl">
+    </form>
+  </div>
+  <div class="card-container">
+    <div *ngFor="let card of filteredCards; let i = index" [ngClass]=" card.isExpanded ? 'cardExpanded' : 'card' ">
+      <div class="delete-button" (click)="deleteCard(card)">X</div>
+      <img [src]="card.img" alt="Card Image">
+      <h2>{{ card.title }}</h2>
+      <p>
+        {{ card.isExpanded ? card.description : (card.description | slice:0:50) }}
+        <span *ngIf="card.description.length > 200">
+          <a href="#" (click)="toggleView(card, $event)">
+            {{ card.isExpanded ? 'Ver menos' : 'Ver mais' }}
+          </a>
+        </span>
+      </p>
+    </div>
+  </div>
+</div>
